@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10 formas de usar IA en tu hotel para ahorrar tiempo y conseguir más reservas | Pau Martí Felip</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --bg2: #111111;
+      --bg3: #181818;
+      --border: #222222;
+      --orange: #f97316;
+      --orange-light: #fb923c;
+      --orange-glow: rgba(249, 115, 22, 0.15);
+      --white: #f5f5f5;
+      --gray: #a3a3a3;
+      --gray-light: #d4d4d4;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 80px 24px;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(249,115,22,0.08) 0%, transparent 70%);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--orange-glow);
+      border: 1px solid rgba(249,115,22,0.3);
+      color: var(--orange-light);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 7px 18px;
+      border-radius: 999px;
+      margin-bottom: 40px;
+    }
+
+    .badge::before {
+      content: '';
+      width: 7px; height: 7px;
+      background: var(--orange);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--orange);
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      max-width: 820px;
+      margin-bottom: 28px;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--orange);
+    }
+
+    .subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--gray);
+      max-width: 600px;
+      margin-bottom: 48px;
+      line-height: 1.65;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--orange);
+      color: #000;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 16px 32px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .hero-cta:hover { background: var(--orange-light); transform: translateY(-2px); }
+    .hero-cta::after { content: '↓'; font-size: 1.1rem; }
+
+    /* ── SECTION WRAPPER ── */
+    section { padding: 96px 24px; }
+    .container { max-width: 780px; margin: 0 auto; }
+
+    .section-tag {
+      display: inline-block;
+      color: var(--orange);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .lead {
+      font-size: 1.1rem;
+      color: var(--gray-light);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    /* ── AUDIENCE BOX ── */
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .audience-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 20px;
+      text-align: center;
+    }
+
+    .audience-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .audience-card p {
+      font-size: 0.9rem;
+      color: var(--gray-light);
+      line-height: 1.5;
+    }
+
+    /* ── PROBLEM ── */
+    .problem-section { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    .problem-list { list-style: none; margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
+
+    .problem-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      font-size: 0.97rem;
+      color: var(--gray-light);
+      line-height: 1.6;
+    }
+
+    .problem-list li::before {
+      content: '✕';
+      color: #ef4444;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── TIPS ── */
+    .tips-list { display: flex; flex-direction: column; gap: 32px; margin-top: 48px; }
+
+    .tip {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    .tip-number {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      background: var(--orange-glow);
+      border: 1px solid rgba(249,115,22,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--orange);
+      flex-shrink: 0;
+    }
+
+    .tip-content h3 {
+      font-size: 1.08rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--white);
+    }
+
+    .tip-content p { font-size: 0.95rem; color: var(--gray-light); line-height: 1.65; }
+
+    .tip-example {
+      margin-top: 12px;
+      background: var(--bg3);
+      border-left: 3px solid var(--orange);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      font-size: 0.88rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    .tip-example strong { color: var(--orange-light); }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 60px; height: 3px;
+      background: var(--orange);
+      border-radius: 2px;
+      margin: 24px 0;
+    }
+
+    /* ── SUMMARY ── */
+    .summary-section { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .summary-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 20px;
+    }
+
+    .summary-card .check {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: var(--orange-glow);
+      border: 1px solid rgba(249,115,22,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: var(--orange);
+      margin-bottom: 14px;
+    }
+
+    .summary-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+    .summary-card p { font-size: 0.85rem; color: var(--gray); line-height: 1.55; }
+
+    /* ── CTA FINAL ── */
+    .cta-section {
+      text-align: center;
+      background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(249,115,22,0.06) 0%, transparent 70%);
+    }
+
+    .cta-box {
+      max-width: 600px;
+      margin: 0 auto;
+      background: var(--bg2);
+      border: 1px solid rgba(249,115,22,0.25);
+      border-radius: 24px;
+      padding: 56px 40px;
+    }
+
+    .cta-box h2 { margin-bottom: 16px; }
+    .cta-box p { color: var(--gray); margin-bottom: 36px; font-size: 1rem; line-height: 1.7; }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--orange);
+      color: #000;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 16px 32px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      margin-bottom: 16px;
+    }
+
+    .cta-btn:hover { background: var(--orange-light); transform: translateY(-2px); }
+
+    .cta-secondary {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-top: 20px;
+    }
+
+    .cta-secondary a { color: var(--orange-light); text-decoration: none; }
+    .cta-secondary a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--gray);
+    }
+
+    footer span { color: var(--orange-light); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .tip { grid-template-columns: 1fr; }
+      .tip-number { width: 44px; height: 44px; font-size: 1rem; }
+      .cta-box { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="badge">Guía práctica · Pau Martí Felip</div>
+    <h1>10 formas de usar <em>Inteligencia Artificial</em> en tu hotel para ahorrar tiempo y conseguir más reservas</h1>
+    <p class="subtitle">Una guía directa y sin rodeos para directores, propietarios y equipos de hoteles que quieren que la IA trabaje para ellos — no al revés.</p>
+    <a class="hero-cta" href="#ideas">Descubrir las 10 ideas</a>
+  </header>
+
+  <!-- PARA QUIÉN ES -->
+  <section>
+    <div class="container">
+      <span class="section-tag">Para quién es</span>
+      <h2>Pensada para los que llevan un hotel de verdad</h2>
+      <p class="lead">No necesitas saber de tecnología. Esta guía es para profesionales del sector hotelero que quieren resultados concretos: menos tiempo en tareas repetitivas y más huéspedes convencidos de reservar contigo.</p>
+      <div class="audience-grid">
+        <div class="audience-card">
+          <span class="audience-icon">🏨</span>
+          <p>Propietarios de hoteles independientes o pequeñas cadenas</p>
+        </div>
+        <div class="audience-card">
+          <span class="audience-icon">📋</span>
+          <p>Directores y responsables de recepción o experiencia del cliente</p>
+        </div>
+        <div class="audience-card">
+          <span class="audience-icon">📣</span>
+          <p>Equipos de marketing y ventas que gestionan OTAs y redes sociales</p>
+        </div>
+        <div class="audience-card">
+          <span class="audience-icon">💡</span>
+          <p>Cualquier persona del sector que quiera modernizar su operativa sin complicaciones</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EL PROBLEMA -->
+  <section class="problem-section">
+    <div class="container">
+      <span class="section-tag">El problema</span>
+      <h2>Lo que lastra a la mayoría de hoteles</h2>
+      <p class="lead">El sector hotelero consume horas en tareas que la IA puede resolver en minutos. Mientras tanto, los grandes competidores ya lo están usando.</p>
+      <ul class="problem-list">
+        <li>Responder siempre las mismas preguntas por email, WhatsApp y Booking — una y otra vez</li>
+        <li>Crear contenido para redes sociales y OTAs desde cero cada semana sin tiempo ni ideas</li>
+        <li>Redactar descripciones de habitaciones genéricas que no convencen a nadie</li>
+        <li>Analizar reseñas a mano y no saber por dónde empezar a mejorar</li>
+        <li>Perder reservas por responder demasiado tarde o con mensajes poco personalizados</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LAS 10 IDEAS -->
+  <section id="ideas">
+    <div class="container">
+      <span class="section-tag">Las 10 ideas</span>
+      <h2>Qué puedes hacer hoy mismo con IA en tu hotel</h2>
+      <div class="divider"></div>
+
+      <div class="tips-list">
+
+        <div class="tip">
+          <div class="tip-number">01</div>
+          <div class="tip-content">
+            <h3>Responde emails y mensajes en segundos, no en horas</h3>
+            <p>Usa IA para redactar respuestas personalizadas a consultas frecuentes: disponibilidad, precios, servicios, cómo llegar. Defines una vez las plantillas base y la IA las adapta a cada caso.</p>
+            <div class="tip-example"><strong>Ejemplo:</strong> Un viajero pregunta si tienen habitación familiar disponible para el puente de diciembre con cuna. La IA genera una respuesta cálida, completa y con disponibilidad en 10 segundos.</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-number">02</div>
+          <div class="tip-content">
+            <h3>Genera descripciones de habitaciones que venden</h3>
+            <p>Deja de usar textos aburridos copiados del catálogo. La IA puede escribir descripciones evocadoras, orientadas a beneficios, adaptadas a cada perfil de viajero: familias, parejas, viajes de negocio.</p>
+            <div class="tip-example"><strong>Ejemplo:</strong> "Suite Junior con vistas al mar, desayuno incluido, para parejas en escapada romántica" — la IA escribe tres versiones distintas según el canal: Booking, web propia, Instagram.</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-number">03</div>
+          <div class="tip-content">
+            <h3>Analiza tus reseñas y convierte críticas en mejoras</h3>
+            <p>Pega tus últimas 50 reseñas de Google o Booking en la IA y pídele que identifique patrones: qué elogian, qué critican, qué repiten. Obtendrás un diagnóstico objetivo en minutos.</p>
+            <div class="tip-example"><strong>Ejemplo:</strong> La IA detecta que el 40% de las reseñas negativas mencionan el ruido por las mañanas. Ya sabes dónde actuar sin leer todas una a una.</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-number">04</div>
+          <div class="tip-content">
+            <h3>Responde reseñas de forma profesional y sin estrés</h3>
+            <p>Responder reseñas negativas es difícil emocionalmente. La IA te propone respuestas serenas, profesionales y empáticas que protegen la imagen del hotel sin perder la cabeza.</p>
+            <div class="tip-example"><strong>Ejemplo:</strong> Un cliente dio 2 estrellas porque el check-in tardó. La IA redacta: "Lamentamos que la espera no cumplió sus expectativas. Hemos reforzado el equipo de recepción en hora punta para que no vuelva a ocurrir. Esperamos darle otra oportunidad."</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-number">05</div>
+          <div class="tip-content">
+            <h3>Crea contenido para redes sociales sin bloqueos</h3>
+            <p>Genera posts para Instagram, Facebook o LinkedIn en cuestión de segundos. La IA puede escribir pies de foto, textos para stories, hilos y hasta hashtags optimizados para el sector hotelero.</p>
+            <div class="tip-example"><strong>Ejemplo:</strong> Prompt: "Escríbeme 5 pies de foto para publicar en Instagram sobre el amanecer desde nuestras habitaciones con vistas al mar." Listo para programar.</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-number">06</div>
+          <div class="tip-content">
+            <h3>Diseña secuencias de email para fidelizar huéspedes</h3>
+            <p>Con IA puedes crear flujos de correo automáticos: antes de la llegada, durante la estancia, y tras el check-out. Cada email pensado para generar vínculo y provocar la siguiente reserva directa.</p>
+            <div class="tip-example"><strong>Ejemplo:</strong> Email pre-llegada: "Te esperamos el jueves. Aquí tienes nuestra guía de restaurantes de confianza cerca del hotel — solo para huéspedes como tú."</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-number">07</div>
+          <div class="tip-content">
+            <h3>Traduce comunicaciones al instante y sin errores</h3>
+            <p>¿Recibes mensajes en alemán, francés o japonés? La IA traduce y responde con naturalidad en el idioma del huésped, sin depender de traductores automáticos torpes o de personal multilingüe.</p>
+            <div class="tip-example"><strong>Ejemplo:</strong> Un cliente escribe en neerlandés preguntando por parking. La IA entiende, traduce, y genera la respuesta en neerlandés con el tono cordial que define a tu hotel.</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-number">08</div>
+          <div class="tip-content">
+            <h3>Crea un FAQ inteligente para tu web y evita llamadas innecesarias</h3>
+            <p>Identifica las 20 preguntas más repetidas de tu recepción. La IA las reformula, las organiza y las convierte en una sección de preguntas frecuentes clara y persuasiva para tu web.</p>
+            <div class="tip-example"><strong>Ejemplo:</strong> "¿Admitís mascotas?" "¿Hay traslado al aeropuerto?" "¿A qué hora es el check-in?" — todas resueltas antes de que el cliente coja el teléfono.</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-number">09</div>
+          <div class="tip-content">
+            <h3>Personaliza ofertas y upselling para cada perfil de huésped</h3>
+            <p>Usa la IA para redactar propuestas de upselling personalizadas según el tipo de reserva: una pareja puede recibir una oferta de spa, una familia una propuesta de cena de cumpleaños.</p>
+            <div class="tip-example"><strong>Ejemplo:</strong> "Vemos que celebráis vuestro aniversario durante la estancia. Nos gustaría ofreceros una botella de cava de bienvenida y una mesa reservada en nuestro restaurante — solo por estar aquí."</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-number">10</div>
+          <div class="tip-content">
+            <h3>Redacta propuestas para grupos, eventos y empresas</h3>
+            <p>Preparar un dossier para grupos o eventos corporativos lleva horas. La IA puede generar el borrador completo — presentación, propuesta de menú, precios, condiciones — en minutos.</p>
+            <div class="tip-example"><strong>Ejemplo:</strong> "Genera una propuesta de evento corporativo de 50 personas con 2 noches de alojamiento, sala de reuniones, coffee break y cena de gala para una empresa de tecnología." — el esqueleto listo para personalizar.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RESUMEN -->
+  <section class="summary-section">
+    <div class="container">
+      <span class="section-tag">Resumen</span>
+      <h2>Lo que cambia cuando aplicas esto</h2>
+      <p class="lead">No se trata de tecnología por la tecnología. Se trata de recuperar tiempo, mejorar la experiencia del huésped y hacer crecer el negocio con los mismos recursos.</p>
+      <div class="summary-grid">
+        <div class="summary-card">
+          <div class="check">↓</div>
+          <h4>Menos tiempo en tareas repetitivas</h4>
+          <p>Respuestas, traducciones y contenido que antes consumían horas, ahora en minutos.</p>
+        </div>
+        <div class="summary-card">
+          <div class="check">↑</div>
+          <h4>Más reservas directas</h4>
+          <p>Mejor contenido, respuestas más rápidas y seguimiento personalizado convierten más visitas en reservas.</p>
+        </div>
+        <div class="summary-card">
+          <div class="check">★</div>
+          <h4>Mejor reputación online</h4>
+          <p>Reseñas gestionadas con criterio y respuestas profesionales mejoran tu puntuación y tu imagen.</p>
+        </div>
+        <div class="summary-card">
+          <div class="check">→</div>
+          <h4>Equipo más enfocado</h4>
+          <p>Tu equipo deja de apagar fuegos y se centra en lo que de verdad importa: la experiencia del huésped.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-box">
+        <span class="section-tag">Siguiente paso</span>
+        <h2>¿Quieres implementarlo en tu hotel?</h2>
+        <p>Trabajo con negocios como el tuyo para diseñar sistemas de IA y automatización hechos a medida, que funcionan desde el primer día. Sin tecnicismos, sin fricción.</p>
+        <a class="cta-btn" href="mailto:paumartifelip@gmail.com">Hablar con Pau →</a>
+        <p class="cta-secondary">
+          También puedes entrar en la comunidad en
+          <a href="https://www.instagram.com/paumartifelip" target="_blank" rel="noopener">Instagram @paumartifelip</a>
+          donde comparto herramientas, casos reales y recursos cada semana.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Creado por <span>Pau Martí Felip</span> · Inteligencia Artificial, Automatización y Sistemas para Negocios</p>
+    <p style="margin-top: 8px; font-size: 0.75rem;">© 2026 · Todos los derechos reservados</p>
+  </footer>
+
+</body>
+</html>
