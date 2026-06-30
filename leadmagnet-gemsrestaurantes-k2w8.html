@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Guía gratuita de Pau Martí Felip: 10 formas de usar Google Gems en tu restaurante para ahorrar tiempo y mejorar resultados." />
+  <title>10 Formas de Usar Google Gems en Tu Restaurante | Pau Martí Felip</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #080808;
+      --surface:     #101010;
+      --card:        #141414;
+      --border:      #1e1e1e;
+      --orange:      #f97316;
+      --orange-lt:   #fb923c;
+      --orange-dim:  rgba(249,115,22,.12);
+      --orange-glow: rgba(249,115,22,.06);
+      --white:       #f4f4f4;
+      --muted:       #7a7a7a;
+      --radius:      14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 88px 24px 80px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--orange-dim);
+      color: var(--orange);
+      border: 1px solid rgba(249,115,22,.28);
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      padding: 6px 20px;
+      border-radius: 100px;
+      margin-bottom: 36px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5.5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.13;
+      letter-spacing: -.025em;
+      margin-bottom: 26px;
+    }
+
+    h1 em { color: var(--orange); font-style: normal; }
+
+    .subtitle {
+      font-size: clamp(.98rem, 2.4vw, 1.18rem);
+      color: #a8a8a8;
+      max-width: 580px;
+      margin: 0 auto 52px;
+      line-height: 1.65;
+    }
+
+    .hero-pills {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .hero-pill {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: .78rem;
+      color: #999;
+      padding: 7px 16px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .hero-pill::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      background: var(--orange);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 56px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--orange), transparent);
+      margin: 0 auto;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 68px 24px;
+    }
+
+    section + section { padding-top: 0; }
+
+    .label {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      font-size: clamp(1.45rem, 3.5vw, 2.1rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      line-height: 1.22;
+      margin-bottom: 20px;
+    }
+
+    p { color: #b4b4b4; margin-bottom: 16px; font-size: .97rem; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── WHAT ARE GEMS ── */
+    .gems-explainer {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .gems-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--orange-dim);
+      border: 1px solid rgba(249,115,22,.25);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+
+    .gems-explainer h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -.01em;
+    }
+
+    .gems-explainer p { color: #999; font-size: .9rem; }
+
+    /* ── FOR WHO ── */
+    .profiles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .profile-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+    }
+
+    .profile-card .icon { font-size: 1.3rem; margin-bottom: 8px; }
+    .profile-card strong { display: block; font-size: .9rem; margin-bottom: 4px; }
+    .profile-card span { font-size: .8rem; color: var(--muted); }
+
+    /* ── PROBLEM ── */
+    .problem-list {
+      margin-top: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .problem-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid #2a2a2a;
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: .9rem;
+      color: #999;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .problem-item::before {
+      content: '—';
+      color: var(--orange);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── GEM CARDS ── */
+    .gems-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-top: 32px;
+    }
+
+    .gem-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color .25s;
+    }
+
+    .gem-card:hover { border-color: rgba(249,115,22,.3); }
+
+    .gem-header {
+      padding: 24px 28px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .gem-num {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      background: var(--orange-dim);
+      border: 1px solid rgba(249,115,22,.25);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .78rem;
+      font-weight: 800;
+      color: var(--orange);
+      margin-top: 4px;
+    }
+
+    .gem-title-wrap { flex: 1; }
+
+    .gem-tag {
+      font-size: .64rem;
+      font-weight: 700;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 5px;
+    }
+
+    .gem-card h3 {
+      font-size: 1.02rem;
+      font-weight: 700;
+      letter-spacing: -.01em;
+      line-height: 1.3;
+    }
+
+    .gem-body { padding: 14px 28px 24px 28px; }
+
+    .gem-body p { font-size: .9rem; color: #aaa; margin-bottom: 14px; }
+
+    .gem-prompt {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 18px;
+    }
+
+    .gem-prompt-label {
+      font-size: .64rem;
+      font-weight: 700;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 8px;
+    }
+
+    .gem-prompt p {
+      font-size: .85rem;
+      color: #888;
+      font-family: 'Courier New', Courier, monospace;
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    .gem-result {
+      background: var(--orange-glow);
+      border: 1px solid rgba(249,115,22,.15);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 10px;
+    }
+
+    .gem-result-label {
+      font-size: .64rem;
+      font-weight: 700;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 6px;
+    }
+
+    .gem-result p { font-size: .85rem; color: #888; margin: 0; font-style: italic; }
+
+    /* ── HOW TO CREATE ── */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 28px;
+      position: relative;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 40px;
+      bottom: 20px;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .step {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      padding-bottom: 28px;
+      position: relative;
+    }
+
+    .step:last-child { padding-bottom: 0; }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .8rem;
+      font-weight: 800;
+      color: var(--orange);
+      z-index: 1;
+    }
+
+    .step-content { padding-top: 8px; }
+    .step-content strong { display: block; font-size: .95rem; margin-bottom: 5px; }
+    .step-content span { font-size: .85rem; color: var(--muted); }
+
+    /* ── SUMMARY ── */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .sum-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 22px 18px;
+      text-align: center;
+    }
+
+    .sum-card .num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--orange);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .sum-card strong { display: block; font-size: .88rem; font-weight: 700; margin-bottom: 4px; }
+    .sum-card span { font-size: .78rem; color: var(--muted); }
+
+    /* ── CTA ── */
+    .cta-wrap {
+      max-width: 780px;
+      margin: 0 auto 80px;
+      padding: 0 24px;
+    }
+
+    .cta-box {
+      background: linear-gradient(140deg, #131313 0%, #1a0e06 100%);
+      border: 1px solid rgba(249,115,22,.22);
+      border-radius: 20px;
+      padding: 60px 44px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-box::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: -100px;
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(249,115,22,.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-box h2 { font-size: clamp(1.4rem, 4vw, 2rem); margin-bottom: 16px; }
+    .cta-box > p { color: #999; max-width: 480px; margin: 0 auto 40px; }
+
+    .btn-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff;
+      font-weight: 700;
+      font-size: .95rem;
+      padding: 15px 34px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+
+    .btn-primary:hover { background: var(--orange-lt); transform: translateY(-2px); }
+
+    .btn-ghost {
+      display: inline-block;
+      background: transparent;
+      color: var(--white);
+      font-weight: 600;
+      font-size: .95rem;
+      padding: 15px 34px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      transition: border-color .2s, transform .15s;
+    }
+
+    .btn-ghost:hover { border-color: var(--orange); transform: translateY(-2px); }
+
+    .author-line {
+      margin-top: 32px;
+      font-size: .78rem;
+      color: #555;
+    }
+
+    .author-line strong { color: var(--orange); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 28px 24px;
+      font-size: .76rem;
+      color: #444;
+    }
+
+    footer a { color: var(--orange); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 540px) {
+      .hero { padding: 60px 20px 52px; }
+      section { padding: 52px 20px; }
+      .cta-box { padding: 40px 24px; }
+      .gem-header { padding: 20px 20px 0; }
+      .gem-body { padding: 14px 20px 22px; }
+      .gems-explainer { grid-template-columns: 1fr; }
+      .btn-row { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-ghost { width: 100%; max-width: 320px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="badge">Guía Gratuita &middot; Pau Martí Felip</div>
+  <h1>10 Formas de Usar <em>Google Gems</em> en Tu Restaurante</h1>
+  <p class="subtitle">Crea asistentes de IA personalizados para tu negocio de hostelería: responde clientes, gestiona reservas, forma a tu equipo y genera contenido en minutos.</p>
+  <div class="hero-pills">
+    <div class="hero-pill">Sin conocimientos técnicos</div>
+    <div class="hero-pill">Gratis con Google Gemini</div>
+    <div class="hero-pill">10 casos de uso reales</div>
+    <div class="hero-pill">Prompts listos para usar</div>
+  </div>
+</header>
+
+<div class="divider"></div>
+
+<!-- QUÉ SON LOS GEMS -->
+<section>
+  <p class="label">Antes de empezar</p>
+  <h2>¿Qué son los Google Gems?</h2>
+  <p>Los Gems son asistentes de IA personalizados que puedes crear dentro de Google Gemini. Es como tener un empleado virtual especializado en cualquier tarea que necesites: uno para responder reseñas, otro para escribir el menú, otro para formar al personal...</p>
+  <p>Están disponibles con Google Gemini (la versión gratuita incluye acceso básico; Gemini Advanced amplía las capacidades). Una vez creados, los puedes usar tantas veces como quieras, compitiendo con soluciones que cuestan cientos de euros al mes.</p>
+  <div class="gems-explainer">
+    <div class="gems-icon">💎</div>
+    <div>
+      <h3>Un Gem = Un asistente especializado</h3>
+      <p>Le das un nombre, le describes su rol y le indicas cómo debe comportarse. Desde ese momento, cada vez que lo abras ya "sabe" quién es y qué tiene que hacer. No tienes que repetir el contexto cada vez.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUIÉN -->
+<section>
+  <p class="label">Para quién es esta guía</p>
+  <h2>Diseñada para negocios de hostelería que quieren trabajar más inteligente</h2>
+  <p>Da igual si tienes un restaurante familiar, una cadena de franquicias, un bar de tapas o un espacio de eventos. Si gestionas un negocio de hostelería y quieres ahorrar tiempo con IA, esta guía es para ti.</p>
+  <div class="profiles">
+    <div class="profile-card">
+      <div class="icon">🍽️</div>
+      <strong>Propietarios de restaurante</strong>
+      <span>Con o sin equipo</span>
+    </div>
+    <div class="profile-card">
+      <div class="icon">📋</div>
+      <strong>Jefes de sala y managers</strong>
+      <span>Gestión diaria optimizada</span>
+    </div>
+    <div class="profile-card">
+      <div class="icon">📱</div>
+      <strong>Responsables de marketing</strong>
+      <span>Contenido y redes sociales</span>
+    </div>
+    <div class="profile-card">
+      <div class="icon">🏠</div>
+      <strong>Bares, cafeterías y catering</strong>
+      <span>Cualquier formato de hostelería</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMA -->
+<section>
+  <p class="label">El problema real</p>
+  <h2>La hostelería es uno de los sectores con más carga operativa</h2>
+  <p>Entre el servicio, las reservas, los proveedores, las redes sociales, las reseñas y la gestión del personal, el tiempo se evapora. Y todo esto recae sobre unas pocas personas que ya van al límite.</p>
+  <div class="problem-list">
+    <div class="problem-item">Responder los mismos mensajes de WhatsApp una y otra vez sobre horarios, alergias y disponibilidad.</div>
+    <div class="problem-item">Gestionar reseñas negativas en Google sin saber qué decir ni cómo decirlo.</div>
+    <div class="problem-item">Crear contenido para Instagram cuando ya son las 11 de la noche y el restaurante acaba de cerrar.</div>
+    <div class="problem-item">Formar a personal nuevo en temporada alta sin tiempo para hacerlo bien.</div>
+    <div class="problem-item">Redactar las descripciones del menú, los emails de reserva y las respuestas a clientes desde cero cada vez.</div>
+  </div>
+</section>
+
+<!-- LOS 10 GEMS -->
+<section>
+  <p class="label">10 Google Gems para restaurantes</p>
+  <h2>Los asistentes de IA que puedes crear hoy mismo</h2>
+
+  <div class="gems-grid">
+
+    <!-- 1 -->
+    <div class="gem-card">
+      <div class="gem-header">
+        <div class="gem-num">01</div>
+        <div class="gem-title-wrap">
+          <p class="gem-tag">Atención al cliente</p>
+          <h3>Gem de respuesta a WhatsApp y mensajes directos</h3>
+        </div>
+      </div>
+      <div class="gem-body">
+        <p>Crea un Gem que conozca tu restaurante al detalle: horarios, carta, alérgenos, política de reservas, precio medio. Pégale cualquier mensaje de cliente y te dará una respuesta lista para enviar en segundos.</p>
+        <div class="gem-prompt">
+          <p class="gem-prompt-label">Cómo configurar el Gem</p>
+          <p>Eres el asistente de comunicación de [Nombre del restaurante]. Conoces nuestra carta, horarios (L-D 13-16h y 20-23h), política de reservas (mínimo 2 personas, confirmación por WhatsApp) y nuestros valores. Responde a los mensajes de los clientes de forma amable, breve y directa. Idioma: español.</p>
+        </div>
+        <div class="gem-result">
+          <p class="gem-result-label">Resultado</p>
+          <p>En 5 segundos tienes una respuesta personalizada para cada cliente, sin copiar y pegar plantillas genéricas.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="gem-card">
+      <div class="gem-header">
+        <div class="gem-num">02</div>
+        <div class="gem-title-wrap">
+          <p class="gem-tag">Reputación online</p>
+          <h3>Gem para responder reseñas de Google Maps</h3>
+        </div>
+      </div>
+      <div class="gem-body">
+        <p>Un Gem que convierte cualquier reseña (positiva, neutra o negativa) en una respuesta profesional, empática y con el tono de tu marca. Nunca más una reseña sin responder.</p>
+        <div class="gem-prompt">
+          <p class="gem-prompt-label">Cómo configurar el Gem</p>
+          <p>Eres el responsable de comunicación de [Restaurante]. Tu objetivo es responder reseñas de Google con tono cercano, profesional y sin excusas. Para reseñas negativas: empatiza, pide disculpas si aplica y ofrece solución. Para positivas: agradece con naturalidad. Máximo 4 líneas.</p>
+        </div>
+        <div class="gem-result">
+          <p class="gem-result-label">Resultado</p>
+          <p>Respondes 10 reseñas en 5 minutos en lugar de 45. Y cada respuesta suena humana, no genérica.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="gem-card">
+      <div class="gem-header">
+        <div class="gem-num">03</div>
+        <div class="gem-title-wrap">
+          <p class="gem-tag">Carta y menú</p>
+          <h3>Gem para escribir descripciones de platos</h3>
+        </div>
+      </div>
+      <div class="gem-body">
+        <p>Dale el nombre del plato y los ingredientes principales. El Gem te devuelve una descripción irresistible para la carta física, la web, Glovo, TheFork o el menú del día.</p>
+        <div class="gem-prompt">
+          <p class="gem-prompt-label">Cómo configurar el Gem</p>
+          <p>Eres un copywriter especializado en gastronomía. Cuando te dé el nombre de un plato y sus ingredientes, escribe una descripción de 2-3 líneas que sea evocadora, apetitosa y concreta. Evita clichés como "elaborado con mimo". Tono: elegante pero accesible.</p>
+        </div>
+        <div class="gem-result">
+          <p class="gem-result-label">Resultado</p>
+          <p>"Tataki de atún con soja, jengibre y aguacate" se convierte en "Lomo de atún marcado a alta temperatura, servido con aguacate en crema y una vinagreta de jengibre y soja que despierta cada sentido."</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="gem-card">
+      <div class="gem-header">
+        <div class="gem-num">04</div>
+        <div class="gem-title-wrap">
+          <p class="gem-tag">Redes sociales</p>
+          <h3>Gem para crear contenido de Instagram y Facebook</h3>
+        </div>
+      </div>
+      <div class="gem-body">
+        <p>Dile qué quieres publicar (el plato del día, una oferta, un evento) y el Gem te genera el texto, el pie de foto y los hashtags optimizados. Semana de contenido en 20 minutos.</p>
+        <div class="gem-prompt">
+          <p class="gem-prompt-label">Cómo configurar el Gem</p>
+          <p>Eres el community manager de [Restaurante], un local de cocina mediterránea en [ciudad]. Creamos contenido para Instagram con tono cercano, visual y que invita a visitar el restaurante. Cuando te dé una idea, genera: texto del post (máx. 150 palabras), pie de foto corto y 8 hashtags relevantes.</p>
+        </div>
+        <div class="gem-result">
+          <p class="gem-result-label">Resultado</p>
+          <p>En vez de quedarte en blanco delante del móvil, en 30 segundos tienes el post listo para publicar.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="gem-card">
+      <div class="gem-header">
+        <div class="gem-num">05</div>
+        <div class="gem-title-wrap">
+          <p class="gem-tag">Formación</p>
+          <h3>Gem de onboarding para personal nuevo</h3>
+        </div>
+      </div>
+      <div class="gem-body">
+        <p>Un asistente que sabe todo sobre tu restaurante y puede resolver las dudas del personal nuevo: cómo funciona el TPV, la política de propinas, los protocolos de servicio, los alérgenos de cada plato.</p>
+        <div class="gem-prompt">
+          <p class="gem-prompt-label">Cómo configurar el Gem</p>
+          <p>Eres el manual de formación de [Restaurante]. Cuando un nuevo empleado te haga una pregunta sobre el protocolo de servicio, los platos, los procedimientos internos o las normas del local, responde de forma clara, breve y con ejemplos prácticos. [Añade aquí los protocolos clave de tu restaurante]</p>
+        </div>
+        <div class="gem-result">
+          <p class="gem-result-label">Resultado</p>
+          <p>Un camarero nuevo puede consultar el Gem en su móvil antes del servicio y rendir desde el primer día, sin depender de que alguien lo supervise cada minuto.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="gem-card">
+      <div class="gem-header">
+        <div class="gem-num">06</div>
+        <div class="gem-title-wrap">
+          <p class="gem-tag">Comunicación</p>
+          <h3>Gem para gestionar quejas y situaciones difíciles</h3>
+        </div>
+      </div>
+      <div class="gem-body">
+        <p>Pégale la queja o describe la situación y el Gem te da la respuesta ideal: calmada, profesional y con una solución concreta. Ideal para el responsable de sala cuando no sabe cómo reaccionar.</p>
+        <div class="gem-prompt">
+          <p class="gem-prompt-label">Cómo configurar el Gem</p>
+          <p>Eres un experto en gestión de conflictos en hostelería. Cuando te describa una queja o situación difícil con un cliente, propón: 1) cómo responder en el momento, 2) qué ofrecer como compensación (si aplica) y 3) cómo evitar que vuelva a pasar. Tono: calmado, empático, profesional.</p>
+        </div>
+        <div class="gem-result">
+          <p class="gem-result-label">Resultado</p>
+          <p>Evitas que una mala gestión de una queja se convierta en una reseña de 1 estrella o una escena en el restaurante.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="gem-card">
+      <div class="gem-header">
+        <div class="gem-num">07</div>
+        <div class="gem-title-wrap">
+          <p class="gem-tag">Marketing</p>
+          <h3>Gem para emails y newsletters de clientes</h3>
+        </div>
+      </div>
+      <div class="gem-body">
+        <p>Desde el email de confirmación de reserva hasta la newsletter mensual con novedades. Dile el objetivo del email y el Gem lo redacta con estructura, asunto y llamada a la acción incluidos.</p>
+        <div class="gem-prompt">
+          <p class="gem-prompt-label">Cómo configurar el Gem</p>
+          <p>Eres el redactor de emails de marketing de [Restaurante]. Cuando te dé el objetivo de un email (confirmar reserva, presentar el menú de Navidad, fidelizar clientes con oferta), escribe: asunto del email, cuerpo (máx. 200 palabras) y llamada a la acción. Tono: cercano, sin exceso de mayúsculas.</p>
+        </div>
+        <div class="gem-result">
+          <p class="gem-result-label">Resultado</p>
+          <p>Tus clientes reciben comunicaciones profesionales que aumentan la repetición de visitas y las reservas anticipadas.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="gem-card">
+      <div class="gem-header">
+        <div class="gem-num">08</div>
+        <div class="gem-title-wrap">
+          <p class="gem-tag">Operaciones</p>
+          <h3>Gem para optimizar el menú del día y especiales</h3>
+        </div>
+      </div>
+      <div class="gem-body">
+        <p>Dile los ingredientes que tienes disponibles y el Gem te sugiere combinaciones de platos coherentes para el menú del día, con nombres atractivos y equilibrio nutricional.</p>
+        <div class="gem-prompt">
+          <p class="gem-prompt-label">Cómo configurar el Gem</p>
+          <p>Eres un chef consultor especializado en menús de restaurante. Cuando te dé una lista de ingredientes disponibles, propón un menú del día de 3 pasos (primero, segundo y postre) con nombres atractivos, descripción breve de cada plato y precio sugerido basado en un ticket medio de [X]€.</p>
+        </div>
+        <div class="gem-result">
+          <p class="gem-result-label">Resultado</p>
+          <p>En 2 minutos tienes el menú del día diseñado, nombrado y listo para poner en la pizarra o enviarlo al grupo de WhatsApp del equipo.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="gem-card">
+      <div class="gem-header">
+        <div class="gem-num">09</div>
+        <div class="gem-title-wrap">
+          <p class="gem-tag">Eventos</p>
+          <h3>Gem para planificar y comunicar eventos especiales</h3>
+        </div>
+      </div>
+      <div class="gem-body">
+        <p>Nochevieja, San Valentín, menú degustación especial... El Gem te ayuda a crear el concepto del evento, el copy de promoción, el menú y el email de invitación en una sola sesión.</p>
+        <div class="gem-prompt">
+          <p class="gem-prompt-label">Cómo configurar el Gem</p>
+          <p>Eres el coordinador de eventos de [Restaurante]. Cuando te dé una fecha o temática de evento, genera: 1) nombre del evento, 2) descripción breve para redes sociales, 3) propuesta de menú (3-4 pasos) y 4) texto para email de invitación. Tono premium pero accesible.</p>
+        </div>
+        <div class="gem-result">
+          <p class="gem-result-label">Resultado</p>
+          <p>Un evento de San Valentín que antes te llevaba 3 horas planificar y comunicar, ahora lo tienes listo en 15 minutos.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="gem-card">
+      <div class="gem-header">
+        <div class="gem-num">10</div>
+        <div class="gem-title-wrap">
+          <p class="gem-tag">Estrategia</p>
+          <h3>Gem de análisis de la competencia y tendencias</h3>
+        </div>
+      </div>
+      <div class="gem-body">
+        <p>Pégale las cartas, reseñas o información de la competencia y pídele que las analice: qué hacen bien, qué huecos puedes ocupar, qué tendencias están explotando que tú todavía no has incorporado.</p>
+        <div class="gem-prompt">
+          <p class="gem-prompt-label">Cómo configurar el Gem</p>
+          <p>Eres un consultor de negocio especializado en hostelería. Cuando te pase información sobre competidores o tendencias del sector, identifica: 1) qué están haciendo diferente, 2) qué puedo aprender o copiar adaptado a mi negocio y 3) qué oportunidades no están aprovechando que yo podría explotar.</p>
+        </div>
+        <div class="gem-result">
+          <p class="gem-result-label">Resultado</p>
+          <p>Tomas decisiones de negocio con más contexto, sin pagar a una consultora ni pasar horas leyendo informes del sector.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CÓMO CREAR UN GEM -->
+<section>
+  <p class="label">Guía rápida</p>
+  <h2>Cómo crear tu primer Gem en 5 minutos</h2>
+  <p>No necesitas saber programar. Solo necesitas una cuenta de Google y acceder a Gemini.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <strong>Ve a gemini.google.com</strong>
+        <span>Inicia sesión con tu cuenta de Google. La versión gratuita ya incluye acceso a Gems.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <strong>Haz clic en "Gem Manager" o "Mis Gems"</strong>
+        <span>Lo encontrarás en el panel lateral izquierdo. Selecciona "Crear nuevo Gem".</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <strong>Dale un nombre y pega el prompt de configuración</strong>
+        <span>Usa uno de los 10 prompts de esta guía como punto de partida. Personalízalo con el nombre de tu restaurante y tus datos.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <strong>Prueba el Gem con un ejemplo real</strong>
+        <span>Pégale un mensaje de cliente real o una reseña reciente. Ajusta el prompt si la respuesta no es exactamente lo que necesitas.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <strong>Guarda y comparte con tu equipo</strong>
+        <span>Puedes compartir el enlace del Gem con tu equipo para que todos lo usen. Un solo Gem bien configurado puede sustituir horas de trabajo manual.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESUMEN -->
+<section>
+  <p class="label">Resumen</p>
+  <h2>Lo que 10 Google Gems pueden hacer por tu restaurante</h2>
+  <p>Cada Gem es una inversión de 10 minutos que te devuelve horas cada semana. No necesitas ser técnico, no necesitas pagar suscripciones caras y puedes empezar hoy mismo.</p>
+  <div class="summary-grid">
+    <div class="sum-card">
+      <div class="num">10</div>
+      <strong>Asistentes especializados</strong>
+      <span>Uno para cada tarea clave de tu negocio</span>
+    </div>
+    <div class="sum-card">
+      <div class="num">0€</div>
+      <strong>Coste inicial</strong>
+      <span>Gemini básico es gratuito con tu cuenta Google</span>
+    </div>
+    <div class="sum-card">
+      <div class="num">5'</div>
+      <strong>Para crear cada Gem</strong>
+      <span>Con los prompts de esta guía, listos en minutos</span>
+    </div>
+    <div class="sum-card">
+      <div class="num">+10h</div>
+      <strong>Ahorradas por semana</strong>
+      <span>En tareas de comunicación y contenido</span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-wrap">
+  <div class="cta-box">
+    <p class="label">¿Quieres ir más lejos?</p>
+    <h2>Te ayudo a implementar la IA en tu restaurante, paso a paso</h2>
+    <p>Más allá de los Gems, hay un mundo de automatizaciones, sistemas y herramientas que pueden transformar cómo gestionas tu negocio. Trabajo con hosteleros para que no tengan que descubrirlo solos.</p>
+    <div class="btn-row">
+      <a href="https://wa.me/34XXXXXXXXX?text=Hola%20Pau%2C%20he%20visto%20tu%20gu%C3%ADa%20de%20Google%20Gems%20para%20restaurantes%20y%20quiero%20saber%20m%C3%A1s" class="btn-primary">Hablemos por WhatsApp</a>
+      <a href="https://www.instagram.com/paumartifelip" class="btn-ghost">Sígueme en Instagram</a>
+    </div>
+    <p class="author-line">Por <strong>Pau Martí Felip</strong> &mdash; IA, Automatización y Sistemas para Negocios</p>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2024 <a href="https://www.instagram.com/paumartifelip">Pau Martí Felip</a> &mdash; Guía de uso libre para fines personales.</p>
+</footer>
+
+</body>
+</html>
