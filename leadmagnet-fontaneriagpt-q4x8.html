@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guía para empresas de fontanería: cómo usar los asistentes GPT (con 10 ejemplos) | Pau Martí Felip</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --bg2: #111111;
+      --bg3: #181818;
+      --border: #222222;
+      --orange: #f97316;
+      --orange-light: #fb923c;
+      --orange-glow: rgba(249, 115, 22, 0.15);
+      --white: #f5f5f5;
+      --gray: #a3a3a3;
+      --gray-light: #d4d4d4;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 80px 24px;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(249,115,22,0.08) 0%, transparent 70%);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--orange-glow);
+      border: 1px solid rgba(249,115,22,0.3);
+      color: var(--orange-light);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 7px 18px;
+      border-radius: 999px;
+      margin-bottom: 40px;
+    }
+
+    .badge::before {
+      content: '';
+      width: 7px; height: 7px;
+      background: var(--orange);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--orange);
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      max-width: 820px;
+      margin-bottom: 28px;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--orange);
+    }
+
+    .subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--gray);
+      max-width: 600px;
+      margin-bottom: 48px;
+      line-height: 1.65;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--orange);
+      color: #000;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 16px 32px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .hero-cta:hover { background: var(--orange-light); transform: translateY(-2px); }
+    .hero-cta::after { content: '↓'; font-size: 1.1rem; }
+
+    /* ── SECTION WRAPPER ── */
+    section { padding: 96px 24px; }
+    .container { max-width: 780px; margin: 0 auto; }
+
+    .section-tag {
+      display: inline-block;
+      color: var(--orange);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .lead {
+      font-size: 1.1rem;
+      color: var(--gray-light);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    /* ── AUDIENCE BOX ── */
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .audience-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 20px;
+      text-align: center;
+    }
+
+    .audience-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .audience-card p {
+      font-size: 0.9rem;
+      color: var(--gray-light);
+      line-height: 1.5;
+    }
+
+    /* ── PROBLEM ── */
+    .problem-section { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    .problem-list { list-style: none; margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
+
+    .problem-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      font-size: 0.97rem;
+      color: var(--gray-light);
+      line-height: 1.6;
+    }
+
+    .problem-list li::before {
+      content: '✕';
+      color: #ef4444;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── TIPS ── */
+    .tips-list { display: flex; flex-direction: column; gap: 32px; margin-top: 48px; }
+
+    .tip {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    .tip-number {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      background: var(--orange-glow);
+      border: 1px solid rgba(249,115,22,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--orange);
+      flex-shrink: 0;
+    }
+
+    .tip-content h3 {
+      font-size: 1.08rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--white);
+    }
+
+    .tip-content p { font-size: 0.95rem; color: var(--gray-light); line-height: 1.65; }
+
+    .tip-example {
+      margin-top: 12px;
+      background: var(--bg3);
+      border-left: 3px solid var(--orange);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      font-size: 0.88rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    .tip-example strong { color: var(--orange-light); }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 60px; height: 3px;
+      background: var(--orange);
+      border-radius: 2px;
+      margin: 24px 0;
+    }
+
+    /* ── SUMMARY ── */
+    .summary-section { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .summary-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 20px;
+    }
+
+    .summary-card .check {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: var(--orange-glow);
+      border: 1px solid rgba(249,115,22,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: var(--orange);
+      margin-bottom: 14px;
+    }
+
+    .summary-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+    .summary-card p { font-size: 0.85rem; color: var(--gray); line-height: 1.55; }
+
+    /* ── CTA FINAL ── */
+    .cta-section {
+      text-align: center;
+      background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(249,115,22,0.06) 0%, transparent 70%);
+    }
+
+    .cta-box {
+      max-width: 600px;
+      margin: 0 auto;
+      background: var(--bg2);
+      border: 1px solid rgba(249,115,22,0.25);
+      border-radius: 24px;
+      padding: 56px 40px;
+    }
+
+    .cta-box h2 { margin-bottom: 16px; }
+    .cta-box p { color: var(--gray); margin-bottom: 36px; font-size: 1rem; line-height: 1.7; }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--orange);
+      color: #000;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 16px 32px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      margin-bottom: 16px;
+    }
+
+    .cta-btn:hover { background: var(--orange-light); transform: translateY(-2px); }
+
+    .cta-secondary {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-top: 20px;
+    }
+
+    .cta-secondary a { color: var(--orange-light); text-decoration: none; }
+    .cta-secondary a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--gray);
+    }
+
+    footer span { color: var(--orange-light); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .tip { grid-template-columns: 1fr; }
+      .tip-number { width: 44px; height: 44px; font-size: 1rem; }
+      .cta-box { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="badge">Guía práctica · Pau Martí Felip</div>
+    <h1>Cómo usar los <em>asistentes GPT</em> en tu empresa de fontanería: 10 ejemplos prácticos</h1>
+    <p class="subtitle">Una guía directa y sin tecnicismos para fontaneros y empresas del sector que quieren ahorrar tiempo, cerrar más presupuestos y dejar de perder horas en tareas administrativas.</p>
+    <a class="hero-cta" href="#ideas">Ver los 10 ejemplos</a>
+  </header>
+
+  <!-- PARA QUIÉN ES -->
+  <section>
+    <div class="container">
+      <span class="section-tag">Para quién es</span>
+      <h2>Pensada para los que llevan una empresa de fontanería de verdad</h2>
+      <p class="lead">No necesitas saber de tecnología ni de inteligencia artificial. Esta guía es para profesionales del sector que quieren resultados concretos: menos tiempo escribiendo presupuestos y mensajes, y más clientes que confían en tu trabajo.</p>
+      <div class="audience-grid">
+        <div class="audience-card">
+          <span class="audience-icon">🔧</span>
+          <p>Fontaneros autónomos que gestionan todo el negocio ellos solos</p>
+        </div>
+        <div class="audience-card">
+          <span class="audience-icon">🏢</span>
+          <p>Empresas de fontanería con varios técnicos y equipo administrativo</p>
+        </div>
+        <div class="audience-card">
+          <span class="audience-icon">📞</span>
+          <p>Personal de atención al cliente que gestiona avisos, citas y urgencias</p>
+        </div>
+        <div class="audience-card">
+          <span class="audience-icon">💡</span>
+          <p>Cualquier profesional del sector que quiera modernizar su negocio sin complicaciones</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EL PROBLEMA -->
+  <section class="problem-section">
+    <div class="container">
+      <span class="section-tag">El problema</span>
+      <h2>Lo que te quita horas cada semana</h2>
+      <p class="lead">El día a día de una empresa de fontanería está lleno de tareas repetitivas que roban tiempo al trabajo que realmente genera ingresos: arreglar averías y atender clientes.</p>
+      <ul class="problem-list">
+        <li>Escribir presupuestos casi idénticos una y otra vez, perdiendo media hora en cada uno</li>
+        <li>Responder siempre las mismas preguntas por WhatsApp, teléfono o email</li>
+        <li>No tener tiempo para cuidar la web, las reseñas ni las redes sociales</li>
+        <li>Improvisar respuestas a reseñas negativas sin saber qué decir</li>
+        <li>Perder clientes por tardar demasiado en responder a una urgencia o consulta</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LOS 10 EJEMPLOS -->
+  <section id="ideas">
+    <div class="container">
+      <span class="section-tag">Los 10 ejemplos</span>
+      <h2>Qué puedes hacer hoy mismo con un asistente GPT en tu empresa</h2>
+      <div class="divider"></div>
+
+      <div class="tips-list">
+
+        <div class="tip">
+          <div class="tip-number">01</div>
+          <div class="tip-content">
+            <h3>Genera presupuestos profesionales en segundos</h3>
+            <p>Describe la avería o el trabajo y deja que el asistente redacte un presupuesto claro, con desglose de materiales, mano de obra y condiciones, listo para enviar por WhatsApp o email.</p>
+            <div class="tip-example"><strong>Ejemplo:</strong> "Genera un presupuesto para cambiar un termo eléctrico de 100L, incluyendo desmontaje del antiguo, instalación y garantía de 2 años." En 30 segundos tienes un texto profesional listo para enviar.</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-number">02</div>
+          <div class="tip-content">
+            <h3>Responde avisos y consultas al instante</h3>
+            <p>Crea un asistente entrenado con tus precios, zona de trabajo y horarios para que responda dudas frecuentes de clientes potenciales sin que tú tengas que estar pendiente del móvil todo el día.</p>
+            <div class="tip-example"><strong>Ejemplo:</strong> Un cliente pregunta si trabajáis fines de semana y cuánto cuesta una desatasco urgente. El asistente responde al momento con tu tarifa y disponibilidad real.</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-number">03</div>
+          <div class="tip-content">
+            <h3>Crea un guion de triaje para urgencias</h3>
+            <p>Pide al asistente que diseñe un guion de preguntas para identificar si una avería es una urgencia real (fuga activa, inundación) o algo que puede esperar, y así organizar mejor tu agenda del día.</p>
+            <div class="tip-example"><strong>Ejemplo:</strong> "Crea un guion de 5 preguntas para saber por teléfono si una fuga de agua requiere intervención inmediata o puede programarse para mañana."</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-number">04</div>
+          <div class="tip-content">
+            <h3>Redacta descripciones de servicios para tu web</h3>
+            <p>Convierte tu lista de servicios (desatascos, instalación de calderas, detección de fugas) en textos claros y persuasivos, pensados para que el cliente entienda el valor antes de llamarte.</p>
+            <div class="tip-example"><strong>Ejemplo:</strong> "Escribe una descripción para la página de 'detección de fugas' de mi web, explicando que usamos cámara termográfica y sin obras." El asistente entrega un texto listo para publicar.</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-number">05</div>
+          <div class="tip-content">
+            <h3>Responde reseñas de Google sin perder los nervios</h3>
+            <p>Pega la reseña, buena o mala, y pide una respuesta profesional y empática. Cuidar tu reputación online ya no depende de que tengas tiempo o ganas ese día.</p>
+            <div class="tip-example"><strong>Ejemplo:</strong> Una reseña de 2 estrellas dice que llegaron tarde. El asistente redacta: "Sentimos el retraso, somos conscientes de lo importante que es la puntualidad y hemos reforzado nuestra planificación de rutas. Gracias por su paciencia."</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-number">06</div>
+          <div class="tip-content">
+            <h3>Crea contenido para redes sociales con consejos útiles</h3>
+            <p>Genera publicaciones con consejos de mantenimiento del hogar que posicionan a tu empresa como experta y generan confianza antes incluso de que haya una avería.</p>
+            <div class="tip-example"><strong>Ejemplo:</strong> "Dame 5 ideas de posts para Instagram sobre cómo evitar que las tuberías se hielen en invierno." Contenido listo para programar toda la semana.</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-number">07</div>
+          <div class="tip-content">
+            <h3>Diseña mensajes de seguimiento post-servicio</h3>
+            <p>Pide al asistente mensajes automáticos para enviar tras cada trabajo: confirmación, agradecimiento y petición de reseña en el momento en que el cliente está más satisfecho.</p>
+            <div class="tip-example"><strong>Ejemplo:</strong> "Hola Marta, gracias por confiar en nosotros para la reparación de hoy. Si todo ha ido bien, nos ayudaría muchísimo que nos dejaras una reseña en Google: [enlace]."</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-number">08</div>
+          <div class="tip-content">
+            <h3>Crea un FAQ inteligente para tu web</h3>
+            <p>Reúne las preguntas que más te hacen los clientes y pide al asistente que las organice en una sección clara de preguntas frecuentes, reduciendo llamadas innecesarias.</p>
+            <div class="tip-example"><strong>Ejemplo:</strong> "¿Hacéis presupuesto gratis?" "¿Trabajáis en fin de semana?" "¿Cuánto tardáis en llegar en una urgencia?" — todo resuelto antes de que el cliente coja el teléfono.</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-number">09</div>
+          <div class="tip-content">
+            <h3>Redacta ofertas y campañas para captar clientes nuevos</h3>
+            <p>Usa el asistente para crear anuncios y promociones puntuales: revisión de calderas antes del invierno, descuentos por zona, packs de mantenimiento anual.</p>
+            <div class="tip-example"><strong>Ejemplo:</strong> "Escribe un anuncio corto para Facebook ofreciendo revisión gratuita de calderas durante octubre en el barrio de Gràcia." Listo para publicar en cinco minutos.</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-number">10</div>
+          <div class="tip-content">
+            <h3>Organiza y resume tu día de trabajo</h3>
+            <p>Pega tus notas de avisos, direcciones y horarios y pide al asistente que te organice la ruta del día por proximidad y prioridad, ahorrándote tiempo de planificación cada mañana.</p>
+            <div class="tip-example"><strong>Ejemplo:</strong> "Tengo estos 6 avisos de hoy con sus direcciones y urgencia, organízamelos en la ruta más eficiente empezando desde el taller." El asistente te entrega el orden óptimo en segundos.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RESUMEN -->
+  <section class="summary-section">
+    <div class="container">
+      <span class="section-tag">Resumen</span>
+      <h2>Lo que cambia cuando aplicas esto</h2>
+      <p class="lead">No se trata de tecnología por la tecnología. Se trata de recuperar horas de trabajo administrativo, responder antes que la competencia y hacer crecer tu empresa con el mismo equipo.</p>
+      <div class="summary-grid">
+        <div class="summary-card">
+          <div class="check">↓</div>
+          <h4>Menos tiempo en tareas repetitivas</h4>
+          <p>Presupuestos, mensajes y respuestas que antes te quitaban horas, ahora en minutos.</p>
+        </div>
+        <div class="summary-card">
+          <div class="check">↑</div>
+          <h4>Más clientes que dicen que sí</h4>
+          <p>Respuestas más rápidas y presupuestos más claros convierten más avisos en trabajos cerrados.</p>
+        </div>
+        <div class="summary-card">
+          <div class="check">★</div>
+          <h4>Mejor reputación online</h4>
+          <p>Reseñas gestionadas con criterio y respuestas profesionales mejoran tu imagen en Google.</p>
+        </div>
+        <div class="summary-card">
+          <div class="check">→</div>
+          <h4>Más tiempo en lo que importa</h4>
+          <p>Menos horas delante del móvil escribiendo y más horas resolviendo averías y facturando.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-box">
+        <span class="section-tag">Siguiente paso</span>
+        <h2>¿Quieres implementarlo en tu empresa de fontanería?</h2>
+        <p>Trabajo con negocios como el tuyo para diseñar asistentes de IA y sistemas de automatización a medida, que funcionan desde el primer día. Sin tecnicismos, sin fricción.</p>
+        <a class="cta-btn" href="mailto:paumartifelip@gmail.com">Hablar con Pau →</a>
+        <p class="cta-secondary">
+          También puedes entrar en la comunidad en
+          <a href="https://www.instagram.com/paumartifelip" target="_blank" rel="noopener">Instagram @paumartifelip</a>
+          donde comparto herramientas, casos reales y recursos cada semana.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Creado por <span>Pau Martí Felip</span> · Inteligencia Artificial, Automatización y Sistemas para Negocios</p>
+    <p style="margin-top: 8px; font-size: 0.75rem;">© 2026 · Todos los derechos reservados</p>
+  </footer>
+
+</body>
+</html>
