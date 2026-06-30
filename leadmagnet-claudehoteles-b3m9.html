@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10 formas de usar Claude en tu hotel | Pau Martí Felip</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080808;
+      --bg2: #101010;
+      --bg3: #161616;
+      --border: #1e1e1e;
+      --orange: #f97316;
+      --orange-light: #fb923c;
+      --orange-dim: rgba(249, 115, 22, 0.12);
+      --white: #f4f4f4;
+      --gray: #9a9a9a;
+      --gray-light: #d0d0d0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 80px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 55% at 50% 0%, rgba(249,115,22,0.09) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--orange-dim);
+      border: 1px solid rgba(249,115,22,0.28);
+      color: var(--orange-light);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      padding: 7px 18px;
+      border-radius: 999px;
+      margin-bottom: 44px;
+      position: relative;
+    }
+
+    .badge-dot {
+      width: 7px; height: 7px;
+      background: var(--orange);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--orange);
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5.5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      max-width: 860px;
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--orange);
+    }
+
+    .subtitle {
+      font-size: clamp(1rem, 2.2vw, 1.22rem);
+      color: var(--gray);
+      max-width: 580px;
+      margin-bottom: 52px;
+      line-height: 1.7;
+      position: relative;
+    }
+
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--orange);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.97rem;
+      padding: 15px 32px;
+      border-radius: 12px;
+      text-decoration: none;
+      position: relative;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .hero-btn:hover { background: var(--orange-light); transform: translateY(-2px); }
+    .hero-btn-icon { font-size: 1.1rem; }
+
+    .hero-scroll {
+      margin-top: 28px;
+      font-size: 0.8rem;
+      color: var(--gray);
+      letter-spacing: 0.06em;
+      position: relative;
+    }
+
+    /* ── LAYOUT ── */
+    section { padding: 96px 24px; }
+    .container { max-width: 800px; margin: 0 auto; }
+
+    .tag {
+      display: inline-block;
+      color: var(--orange);
+      font-size: 0.73rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      font-size: clamp(1.6rem, 3.8vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.18;
+      margin-bottom: 18px;
+    }
+
+    .lead {
+      font-size: 1.05rem;
+      color: var(--gray-light);
+      line-height: 1.8;
+    }
+
+    .divider {
+      width: 48px; height: 3px;
+      background: var(--orange);
+      border-radius: 2px;
+      margin: 28px 0;
+    }
+
+    /* ── AUDIENCE ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 14px;
+      margin-top: 40px;
+    }
+
+    .card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 20px;
+    }
+
+    .card-icon {
+      font-size: 1.8rem;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .card p { font-size: 0.88rem; color: var(--gray-light); line-height: 1.55; }
+
+    /* ── PROBLEMS ── */
+    .alt-section {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .problem-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 36px;
+    }
+
+    .problem-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      font-size: 0.95rem;
+      color: var(--gray-light);
+      line-height: 1.6;
+    }
+
+    .x-mark {
+      color: #ef4444;
+      font-weight: 700;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── TIPS ── */
+    .tips { display: flex; flex-direction: column; gap: 36px; margin-top: 52px; }
+
+    .tip {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    .tip-num {
+      width: 60px; height: 60px;
+      border-radius: 14px;
+      background: var(--orange-dim);
+      border: 1px solid rgba(249,115,22,0.28);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--orange);
+      flex-shrink: 0;
+      letter-spacing: -0.03em;
+    }
+
+    .tip-body h3 {
+      font-size: 1.07rem;
+      font-weight: 700;
+      margin-bottom: 9px;
+      color: var(--white);
+      line-height: 1.35;
+    }
+
+    .tip-body p {
+      font-size: 0.93rem;
+      color: var(--gray-light);
+      line-height: 1.7;
+    }
+
+    .tip-example {
+      margin-top: 14px;
+      background: var(--bg3);
+      border-left: 3px solid var(--orange);
+      border-radius: 0 10px 10px 0;
+      padding: 13px 18px;
+      font-size: 0.87rem;
+      color: var(--gray);
+      line-height: 1.65;
+    }
+
+    .tip-example strong { color: var(--orange-light); }
+
+    .prompt-box {
+      margin-top: 10px;
+      background: #0d0d0d;
+      border: 1px solid #2a2a2a;
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      color: #a8c4a8;
+      line-height: 1.6;
+    }
+
+    .prompt-box::before {
+      content: '💬 Prompt para Claude:';
+      display: block;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 0.75rem;
+      color: var(--orange-light);
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-style: normal;
+    }
+
+    /* ── SUMMARY ── */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-top: 44px;
+    }
+
+    .summary-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 26px 22px;
+    }
+
+    .summary-card .icon {
+      width: 36px; height: 36px;
+      border-radius: 9px;
+      background: var(--orange-dim);
+      border: 1px solid rgba(249,115,22,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+
+    .summary-card h4 { font-size: 0.97rem; font-weight: 700; margin-bottom: 7px; }
+    .summary-card p { font-size: 0.85rem; color: var(--gray); line-height: 1.55; }
+
+    /* ── CTA ── */
+    .cta-section {
+      text-align: center;
+      background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(249,115,22,0.05) 0%, transparent 70%);
+    }
+
+    .cta-inner {
+      max-width: 620px;
+      margin: 0 auto;
+      background: var(--bg2);
+      border: 1px solid rgba(249,115,22,0.22);
+      border-radius: 24px;
+      padding: 60px 44px;
+    }
+
+    .cta-inner h2 { margin-bottom: 16px; }
+    .cta-inner .lead { margin-bottom: 40px; }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--orange);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.97rem;
+      padding: 15px 32px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .cta-btn:hover { background: var(--orange-light); transform: translateY(-2px); }
+
+    .cta-note {
+      margin-top: 22px;
+      font-size: 0.84rem;
+      color: var(--gray);
+    }
+
+    .cta-note a { color: var(--orange-light); text-decoration: none; }
+    .cta-note a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 44px 24px;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--gray);
+    }
+
+    footer span { color: var(--orange-light); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 580px) {
+      .tip { grid-template-columns: 1fr; }
+      .tip-num { width: 48px; height: 48px; font-size: 1.05rem; }
+      .cta-inner { padding: 40px 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="badge">
+      <span class="badge-dot"></span>
+      Guía práctica · Pau Martí Felip
+    </div>
+    <h1>10 formas de usar <em>Claude</em> en tu hotel para trabajar mejor y conseguir más reservas</h1>
+    <p class="subtitle">Claude es el asistente de IA más avanzado para texto. Esta guía te muestra cómo aplicarlo en tu hotel desde el primer día, sin saber de tecnología.</p>
+    <a class="hero-btn" href="#ideas">
+      <span>Ver las 10 ideas</span>
+      <span class="hero-btn-icon">↓</span>
+    </a>
+    <p class="hero-scroll">Lectura: 6 minutos · Aplicable hoy mismo</p>
+  </header>
+
+  <!-- PARA QUIÉN ES -->
+  <section>
+    <div class="container">
+      <span class="tag">Para quién es</span>
+      <h2>Si llevas un hotel, esto es para ti</h2>
+      <div class="divider"></div>
+      <p class="lead">No hace falta ser técnico. Si tienes acceso a internet y ganas de mejorar, puedes empezar hoy mismo a usar Claude para liberar tiempo, mejorar la comunicación con tus huéspedes y captar más reservas directas.</p>
+      <div class="cards-grid">
+        <div class="card">
+          <span class="card-icon">🏨</span>
+          <p>Propietarios de hoteles independientes que lo gestionan todo ellos mismos</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">📋</span>
+          <p>Directores y jefes de recepción que buscan agilizar la operativa diaria</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">📣</span>
+          <p>Equipos de ventas y marketing que quieren más reservas con menos esfuerzo</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🔑</span>
+          <p>Responsables de experiencia del huésped que quieren personalizar cada estancia</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EL PROBLEMA -->
+  <section class="alt-section">
+    <div class="container">
+      <span class="tag">El problema real</span>
+      <h2>Demasiadas tareas, demasiado poco tiempo</h2>
+      <div class="divider"></div>
+      <p class="lead">Los hoteles pierden horas cada día en tareas de texto que podrían hacerse en minutos. Y eso tiene un coste directo en reservas, reputación y energía del equipo.</p>
+      <ul class="problem-list">
+        <li><span class="x-mark">✕</span> Responder cada consulta desde cero, en varios idiomas, por varios canales a la vez</li>
+        <li><span class="x-mark">✕</span> Escribir textos para la web, OTAs y redes sin ideas frescas ni tiempo libre</li>
+        <li><span class="x-mark">✕</span> Gestionar reseñas negativas emocionalmente sin saber qué responder</li>
+        <li><span class="x-mark">✕</span> Preparar propuestas para grupos o eventos que llevan horas de trabajo</li>
+        <li><span class="x-mark">✕</span> Perder reservas por no hacer seguimiento personalizado después del check-out</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LAS 10 IDEAS -->
+  <section id="ideas">
+    <div class="container">
+      <span class="tag">Las 10 ideas</span>
+      <h2>Cómo usar Claude en tu hotel, paso a paso</h2>
+      <div class="divider"></div>
+      <p class="lead">Cada idea incluye un ejemplo real y un prompt listo para copiar y pegar en Claude. Solo necesitas una cuenta en claude.ai para empezar.</p>
+
+      <div class="tips">
+
+        <div class="tip">
+          <div class="tip-num">01</div>
+          <div class="tip-body">
+            <h3>Responde emails de clientes en segundos</h3>
+            <p>Dale a Claude el contexto de tu hotel y el email del cliente. Te devuelve una respuesta cálida, completa y en el tono que quieras en menos de 10 segundos. Puedes ajustarla o enviarla directamente.</p>
+            <div class="prompt-box">Eres el responsable de atención al cliente del Hotel Mirador, un hotel boutique de 4 estrellas en la Costa Brava. Tu tono es cercano y profesional. Responde este email de un cliente: "[pega el email aquí]"</div>
+            <div class="tip-example"><strong>Resultado:</strong> Una respuesta personalizada lista para enviar, que suena como una persona real y no como una plantilla.</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-num">02</div>
+          <div class="tip-body">
+            <h3>Traduce y adapta comunicaciones a cualquier idioma</h3>
+            <p>Claude no solo traduce: adapta el tono, las expresiones y la calidez según la cultura del destinatario. Alemán, francés, japonés, neerlandés — sin depender de ningún servicio externo.</p>
+            <div class="prompt-box">Traduce este mensaje al alemán manteniendo un tono cordial y profesional, adaptado a un viajero alemán que busca tranquilidad y orden: "[texto en español]"</div>
+            <div class="tip-example"><strong>Ejemplo:</strong> Un cliente escribe en japonés preguntando por el menú de alergias. Claude entiende, responde en japonés y lo hace con el nivel de cortesía apropiado.</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-num">03</div>
+          <div class="tip-body">
+            <h3>Reescribe las descripciones de tus habitaciones para que vendan</h3>
+            <p>La mayoría de descripciones hoteleras son genéricas y aburridas. Claude transforma textos planos en experiencias que el viajero ya puede imaginar — y eso convierte visitas en reservas.</p>
+            <div class="prompt-box">Reescribe esta descripción de habitación para que resulte más evocadora y orientada a una pareja en escapada romántica. Hazla más sensorial, menos técnica. Máximo 120 palabras: "[descripción actual]"</div>
+            <div class="tip-example"><strong>Ejemplo:</strong> "Habitación doble con vistas al mar" se convierte en "Despierta con el sonido de las olas y la luz del Mediterráneo entrando por tu ventana. La Suite Panorámica está pensada para los que quieren que cada momento cuente."</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-num">04</div>
+          <div class="tip-body">
+            <h3>Gestiona las reseñas negativas sin perder la calma</h3>
+            <p>Responder una reseña negativa mal puede costar más que la propia queja. Claude genera respuestas que reconocen el problema, muestran empatía y protegen la imagen del hotel — sin sonar a excusa.</p>
+            <div class="prompt-box">Genera una respuesta profesional y empática a esta reseña negativa de Google. Reconoce el problema, ofrece disculpas genuinas y termina con una invitación a volver. No suenes defensivo: "[reseña]"</div>
+            <div class="tip-example"><strong>Ejemplo:</strong> Un cliente dio 2 estrellas por el ruido. La respuesta de Claude: "Lamentamos que el descanso no cumplió sus expectativas. Hemos incorporado mejoras en el aislamiento de esa zona. Nos gustaría poder demostrarle el cambio en su próxima visita."</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-num">05</div>
+          <div class="tip-body">
+            <h3>Crea contenido para redes sociales sin bloqueos creativos</h3>
+            <p>Genera posts, pies de foto, stories y textos para campañas en segundos. Puedes pedir varios formatos a la vez y elegir el que mejor encaja con tu marca.</p>
+            <div class="prompt-box">Escríbeme 5 pies de foto para Instagram sobre el atardecer desde la terraza de nuestro hotel. Tono: inspiracional, cercano, para viajeros de entre 30 y 50 años. Incluye 3 hashtags relevantes por cada uno.</div>
+            <div class="tip-example"><strong>Ejemplo:</strong> "Hay atardeceres que se quedan contigo para siempre. Este es uno de ellos. ¿Cuándo fue la última vez que paraste a mirar el cielo? #HotelMirador #PuestasDeSol #EscapadaRural"</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-num">06</div>
+          <div class="tip-body">
+            <h3>Diseña emails de seguimiento para conseguir reservas directas</h3>
+            <p>El momento más valioso es el que sigue al check-out. Claude crea secuencias de email que mantienen el vínculo, ofrecen valor y llevan al cliente a reservar directamente sin pasar por las OTAs.</p>
+            <div class="prompt-box">Escríbeme un email de seguimiento para enviar 7 días después del check-out. El objetivo es que el cliente vuelva a reservar directamente con nosotros. Ofrece un descuento exclusivo por fidelidad del 10%. Tono: cálido, personal, sin ser agresivo.</div>
+            <div class="tip-example"><strong>Resultado:</strong> Un email que el huésped quiere leer — no uno más que lleva directo a la carpeta de spam.</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-num">07</div>
+          <div class="tip-body">
+            <h3>Prepara propuestas para grupos y eventos en minutos</h3>
+            <p>Elaborar un dossier para un grupo corporativo o una celebración familiar llevaba horas. Con Claude, tienes un borrador profesional en minutos que solo necesita personalización final.</p>
+            <div class="prompt-box">Redacta una propuesta comercial para un grupo de 40 personas que quieren celebrar una cena de empresa. Incluye: presentación del hotel, opciones de menú, tarifa por persona, condiciones de reserva y cierre emocional. Tono corporativo pero cercano.</div>
+            <div class="tip-example"><strong>Ejemplo:</strong> En lugar de pasar la tarde escribiendo, envías la propuesta antes de comer. El cliente percibe agilidad y profesionalidad.</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-num">08</div>
+          <div class="tip-body">
+            <h3>Analiza tus reseñas y extrae patrones de mejora</h3>
+            <p>Pega tus últimas 30 o 50 reseñas en Claude y pídele que identifique tendencias: qué elogian, qué critican, qué palabras usan para describir la experiencia. En minutos tienes un diagnóstico que llevaría días hacer manualmente.</p>
+            <div class="prompt-box">Analiza estas reseñas de clientes. Identifica: (1) los 3 puntos más elogiados, (2) los 3 problemas más mencionados, (3) palabras que usan para describir el ambiente. Responde en formato de lista clara: [pega las reseñas]</div>
+            <div class="tip-example"><strong>Ejemplo:</strong> Claude detecta que el 35% de las reseñas negativas mencionan el WiFi y que el 60% de las positivas destacan el trato del personal. Ya sabes qué arreglar y qué potenciar.</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-num">09</div>
+          <div class="tip-body">
+            <h3>Crea una guía de bienvenida personalizada para cada perfil de huésped</h3>
+            <p>Una guía genérica no conecta con nadie. Claude puede generar versiones adaptadas a familias, parejas, viajeros de negocios o grupos de amigos — con recomendaciones, normas y tono ajustado a cada uno.</p>
+            <div class="prompt-box">Crea una guía de bienvenida para familias con niños pequeños que se alojan en nuestro hotel en la Costa Brava. Incluye: horarios del hotel, servicios para niños, restaurantes familiares cerca, actividades recomendadas y consejos de seguridad en la playa. Tono: amigable y tranquilizador para padres.</div>
+            <div class="tip-example"><strong>Resultado:</strong> Una guía que el huésped lee porque le habla directamente a él — no un PDF genérico que nadie abre.</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-num">10</div>
+          <div class="tip-body">
+            <h3>Genera ideas de upselling personalizadas por tipo de reserva</h3>
+            <p>Claude puede ayudarte a identificar qué extras ofrecer a cada huésped según su tipo de reserva, fechas o perfil. Un upselling bien planteado no molesta — añade valor y genera ingresos extra sin esfuerzo.</p>
+            <div class="prompt-box">Un cliente ha reservado una habitación doble para el fin de semana de San Valentín. Sugiere 3 propuestas de upselling que podría apreciar: una en franja de precio bajo, una media y una premium. Escribe el mensaje de oferta para cada una, tono romántico y sin presión.</div>
+            <div class="tip-example"><strong>Ejemplo:</strong> Cava de bienvenida (19€), masaje para dos (89€) o cena privada en la terraza con vistas (150€) — cada uno presentado como una experiencia, no como un extra de venta.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RESUMEN -->
+  <section class="alt-section">
+    <div class="container">
+      <span class="tag">Lo que cambia</span>
+      <h2>Claude no sustituye a tu equipo. Multiplica lo que ya hace bien.</h2>
+      <div class="divider"></div>
+      <p class="lead">Con estas 10 aplicaciones, el mismo equipo de siempre puede atender más consultas, crear mejor contenido, gestionar su reputación con criterio y cerrar más reservas — sin trabajar más horas.</p>
+      <div class="summary-grid">
+        <div class="summary-card">
+          <div class="icon">⚡</div>
+          <h4>Velocidad en la operativa</h4>
+          <p>Emails, propuestas y contenido que antes llevaban horas, ahora en minutos.</p>
+        </div>
+        <div class="summary-card">
+          <div class="icon">🌍</div>
+          <h4>Comunicación sin barreras</h4>
+          <p>Responde a cualquier idioma con el tono correcto, sin traductores externos.</p>
+        </div>
+        <div class="summary-card">
+          <div class="icon">💬</div>
+          <h4>Reputación más fuerte</h4>
+          <p>Reseñas gestionadas con inteligencia y respuestas que generan confianza.</p>
+        </div>
+        <div class="summary-card">
+          <div class="icon">📈</div>
+          <h4>Más ingresos directos</h4>
+          <p>Upselling, seguimiento y contenido que reduce la dependencia de las OTAs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-inner">
+        <span class="tag">Siguiente paso</span>
+        <h2>¿Quieres que Claude trabaje de verdad en tu hotel?</h2>
+        <p class="lead">Diseño sistemas de IA y automatización a medida para negocios hoteleros: desde prompts optimizados hasta flujos automáticos que funcionan solos. Sin tecnicismos. Con resultados reales.</p>
+        <a class="cta-btn" href="mailto:paumartifelip@gmail.com">Hablar con Pau →</a>
+        <p class="cta-note">
+          O sígueme en <a href="https://www.instagram.com/paumartifelip" target="_blank" rel="noopener">Instagram @paumartifelip</a> donde comparto herramientas, prompts y casos reales cada semana.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Creado por <span>Pau Martí Felip</span> · IA, Automatización y Sistemas para Negocios Hoteleros</p>
+    <p style="margin-top: 8px; font-size: 0.76rem;">© 2026 · Todos los derechos reservados</p>
+  </footer>
+
+</body>
+</html>
